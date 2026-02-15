@@ -1,24 +1,49 @@
 .recipes {
-	&-container {
+	&__container {
 		list-style: none;
+		padding-left: 0;
 	}
 
-	&-card {
+	&__card {
 		display: flex;
 		gap: 12px;
 		padding: 4px;
 		border: 2px solid white;
 		margin-bottom: 16px;
+		align-items: stretch;
 	}
 
-	&-card-image {
-		height: 100px;
-		width: 100px;
+	&__image {
+		flex-shrink: 0;
+		height: 100%;
+		max-width: 150px;
+		align-self: center;
 
 		img {
 			height: 100%;
 			width: 100%;
 			object-fit: cover;
+			align-self: center;
+		}
+	}
+
+	&__link {
+		display: inline-block;
+		margin-top: 8px;
+		padding: 4px 8px;
+		border: 2px solid white;
+		color: white;
+		text-decoration: none;
+		&:hover {
+			border-color: grey;
+		}
+	}
+}
+
+@media (max-width: 700px) {
+	.recipes {
+		&-container {
+			padding-left: 0;
 		}
 	}
 }

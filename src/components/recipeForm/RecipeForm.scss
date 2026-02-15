@@ -1,0 +1,112 @@
+.form {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	row-gap: 24px;
+	column-gap: 12px;
+	align-items: center;
+	max-width: 450px;
+
+	&__group {
+		display: contents;
+	}
+
+	&__group-label {
+		text-align: right;
+		white-space: nowrap;
+	}
+
+	&__input-box {
+		box-sizing: border-box;
+		border: 2px solid white;
+		// width: 250px;
+		display: flex;
+		align-items: center;
+		padding: 8px;
+		&:focus-within {
+			outline: 1px solid white;
+			outline-offset: -6px
+		}
+		&:hover {
+			border-color: grey;
+		}
+
+		&--error {
+			&, &:hover{
+					border-color: red;
+			}
+			.form__icon {
+					color: red;
+			}
+		}
+	}
+
+	&__validation-message {
+		color: red;
+		position: absolute;
+		bottom: calc(0px - 18px);
+		font-size: 12px;
+		margin: 0;
+	}
+
+	&__input-wrapper {
+		position: relative;
+	}
+
+	&__input {
+		flex-grow: 1;
+		&:focus {
+				outline: none;
+		}
+	}
+
+	&__select {
+		border: 2px solid white;
+		padding: 8px;
+		width: 100%;
+		background-color: transparent;
+		color: white;
+		&:hover {
+			border-color: grey;
+		}
+	}
+
+	&__button {
+		grid-column: 2 / -1;
+		padding: 8px;
+		border: 2px solid white;
+		background-color: transparent;
+		color: white;
+		&:hover {
+			border-color: grey;
+		}
+	}
+}
+
+//@900, put the titles on top
+@media (max-width: 900px) {
+	.form {
+		grid-template-columns: 1fr;
+		row-gap: 8px;
+
+		&__group {
+			display: block;
+			margin-bottom: 16px;
+		}
+		&__group-label {
+			text-align: left;
+			margin-bottom: 4px;
+			display: block;
+		}
+				&__button {
+		grid-column: 1 / -1;
+		}
+	}
+}
+
+@media (max-width: 700px) {
+	.form {
+		width: 80%;
+		max-width: 450px;
+		margin: 0 auto;
+	}
+}

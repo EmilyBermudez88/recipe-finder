@@ -23,20 +23,20 @@ const RecipeList = ({ recipes, page, updatePage, totalResults }: RecipeListProps
 	const totalPages = Math.ceil(totalResults / RESULTS_PER_PAGE);
 	return (
 		<>
-			<ul className="recipes-container">
+			<ul className="recipes__container">
 				{recipes.map((recipe) => (
-					<li key={recipe.id} className="recipes-card">
-            <div className="recipes-card-image">
+					<li key={recipe.id} className="recipes__card">
+            <div className="recipes__image">
               <img src={recipe.image} alt={recipe.title} />
             </div>
             <div>
               <h3>{recipe.title}</h3>
-              <NavLink to={`recipe/${recipe.id}`}>View Recipe</NavLink>
+              <NavLink to={`recipe/${recipe.id}`} className="recipes__link">View Recipe</NavLink>
             </div>
 					</li>
 				))}
 			</ul>
-			<div className="button-bar">
+			<div className="recipes__button-bar">
 				<button disabled={page === 1} onClick={() => updatePage('decrement')} aria-label="view previous results">
 					<FontAwesomeIcon icon={faCaretLeft} />
 				</button>

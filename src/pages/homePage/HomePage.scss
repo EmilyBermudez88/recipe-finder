@@ -1,0 +1,37 @@
+.main--home {
+	box-sizing: border-box;
+	display: flex;
+	min-height: 100vh;
+	height: 100%;
+	padding: 20px;
+	width: 100%;
+	max-width: 1400px;
+}
+
+.home {
+	&__search {
+		text-align: center;
+		width: 40%;
+	}
+
+	&__content {
+		width: 60%;
+		margin-left: 50px;
+	}
+}
+
+@media (max-width: 700px) {
+	.main--home {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.home {
+		&__search,
+		&__content {
+			width: 100%;
+			max-width: 500px;
+			margin-left: 0;
+		}
+	}
+}
