@@ -11,7 +11,7 @@ type RecipeFormProps = {
 }
 
 const RecipeForm = ({ submitChoices }: RecipeFormProps) => {
-	const { searchParams } = useContext(RecipeContext);
+	const { searchParams } = useContext(RecipeContext)!;
 	const [recipeName, setRecipeName] = useState(searchParams.keyword);
 	const [cuisine, setCuisine] = useState(searchParams.cuisine);
 	const [time, setTime] = useState(MAX_TIME_LIST.find((option) => option.value === searchParams.time)?.value || 0);
