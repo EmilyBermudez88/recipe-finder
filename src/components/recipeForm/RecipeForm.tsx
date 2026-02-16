@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faX } from "@fortawesome/free-solid-svg-icons";
 import { RecipeContext } from '../../contexts/recipeContext';
-import { CUISINE_LIST, MAX_TIME_LIST } from '../../cuisines';
+import { CUISINE_LIST, MAX_TIME_LIST } from '../../utils/dropdownOptions';
 import './RecipeForm.scss';
 
 type RecipeFormProps = {

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
-import { fetchRecipeDetails } from '../../spoonacularService';
+import { fetchRecipeDetails } from '../../utils/spoonacularService';
 import './RecipePage.scss';
 
 type InstructionStep = {
@@ -28,6 +28,7 @@ type RecipeDetails = {
 	glutenFree: boolean;
 	dairyFree: boolean;
 	analyzedInstructions: { name: string; steps: InstructionStep[] }[];
+	creditsText: string;
 }
 
 const RecipePage = () => {
@@ -35,7 +36,6 @@ const RecipePage = () => {
 	const [loadError, setLoadError] = useState('');
 	const [recipeDetails, setRecipeDetails] = useState<RecipeDetails | null>(null);
 	const [loading, setLoading] = useState(false);
-	// const [instructions, setInstructions] = useState<string[]>([]);
 
 	useEffect(() => {
 		if (!recipeId) return;
@@ -47,21 +47,7 @@ const RecipePage = () => {
 			.then((data) => setRecipeDetails(data))
 			.catch((err) => setLoadError(err.message || 'Failed to load recipe details.'))
 			.finally(() => setLoading(false));
-	
-		// fetchRecipeInstructions(id)
-		// 	.then((data) => {
-		// 		if (data.length > 0 && data[0].steps) {
-		// 			const steps = data[0].steps.map((step: InstructionStep) => ({description: step.step, order: step.number}));
-		// 			setInstructions(steps);
-		// 		} else {
-		// 			setInstructions(['No instructions available.']);
-		// 		}
-		// 	})
-		// 	.catch((err) => setLoadError(err.message || 'Failed to laod recipe instructions.'));
-
 	}, [recipeId]);
-
-	console.log(recipeDetails);
 
 	return (
 		<div className="recipe-page">
@@ -77,28 +63,31 @@ const RecipePage = () => {
 				{recipeDetails && !loading ? (
 					<>
 						<div className="recipe__header">
+							<h1 className="recipe__title">{recipeDetails.title}</h1>
 							<div className="recipe__image">
 								<img src={recipeDetails.image} alt={recipeDetails.title} />
 							</div>
 							<div className="recipe__highlights">
-								<h1>{recipeDetails.title}</h1>
 								<div className="recipe__pill-bar">
 									{recipeDetails.vegetarian && <span className="recipe__pill recipe__pill--veggie">Vegetarian</span>}
 									{recipeDetails.vegan && <span className="recipe__pill recipe__pill--vegan">Vegan</span>}
 									{recipeDetails.dairyFree && <span className="recipe__pill recipe__pill--dairy">Dairy Free</span>}
 									{recipeDetails.glutenFree && <span className="recipe__pill recipe__pill--gluten">Gluten Free</span>}
 								</div>
-								<p>Ready in: {recipeDetails.readyInMinutes} minutes</p>
-								<p>Serves: {recipeDetails.servings}</p>
+								<div className="recipe__highlights-container">
+									<p className="recipe__highlights-text"><b>Ready In:</b> {recipeDetails.readyInMinutes} minutes</p>
+									<p className="recipe__highlights-text"><b>Serves:</b> {recipeDetails.servings}</p>
+									<p className="recipe__highlights-text"><b>By:</b> {recipeDetails.creditsText}</p>
+								</div>
 							</div>
 						</div>
 						<div className="recipe__ingredients">
 							<h2>Ingredients</h2>
 							{recipeDetails.extendedIngredients.length > 0 && (
-								<ul>
+								<ul className="recipe__list">
 									{recipeDetails.extendedIngredients.map((ingredient) => (
 										<li key={ingredient.id}>
-											<p>{ingredient.original}</p>
+											<p className="recipe__ingredient-item">{ingredient.original}</p>
 										</li>
 									))}
 								</ul>
@@ -107,9 +96,9 @@ const RecipePage = () => {
 						<div className="recipe__instructions">
 							<h2>Instructions</h2>
 							{recipeDetails.analyzedInstructions.length > 0 && (
-								<ol>
+								<ol className="recipe__list">
 									{recipeDetails.analyzedInstructions[0].steps.map((step) => (
-										<li key={step.number}>{step.step}</li>
+										<li key={step.number} className="recipe__instructions-step">{step.step}</li>
 									))}
 								</ol>
 							)}

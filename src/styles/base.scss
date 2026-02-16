@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');
 
 :root {
+  box-sizing: border-box;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   width: 100%;
   min-width: 350px;
@@ -10,7 +11,7 @@
   min-height: 100vh;
   margin: 0 auto;
   font-weight: 400;
-  background-color: rgb(167, 216, 198);
+  background-color: rgb(175, 226, 207);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,11 +24,13 @@
   --font-size: 16px;
   --font-size-lrg: 18px;
   --font-size-sm: 12px;
+  --font-size-h1: 48px;
 
   --spacing-base: 4px;
   --spacing-2x: 8px;
   --spacing-3x: 12px;
   --spacing-4x: 16px;
+  --spacing-5x: 20px;
   --spacing-6x: 24px;
   --spacing-8x: 32px;
   --spacing-10x: 40px;
@@ -40,7 +43,7 @@
 
   --text-colour: rgb(80, 80, 80);
 
-  --card-colour: rgb(180, 232, 213);
+  --card-colour: rgb(190, 243, 224);
   --white: rgb(250, 250, 250);
   --black: rgb(5, 5, 5);
   --disabled: rgb(220, 220, 220);

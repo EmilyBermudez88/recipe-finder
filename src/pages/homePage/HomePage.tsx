@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { RecipeContext } from '../../contexts/recipeContext';
 import RecipeForm from '../../components/recipeForm/RecipeForm';
 import RecipeList from '../../components/recipeList/RecipeList';
-import { fetchRecipes } from '../../spoonacularService';
+import { fetchRecipes } from '../../utils/spoonacularService';
 import './HomePage.scss';
 
 const RESULTS_PER_PAGE = 5;
@@ -15,6 +15,7 @@ const HomePage = () => {
 	const [submitted, setSubmitted] = useState(false);
 	const renderResults = recipes.length > 0 && !loading;
 	const renderNoResults = recipes.length === 0 && submitted && !loading && !loadError;
+	const renderSearchPrompt = recipes.length === 0 && !submitted && !loading;
 
   const loadRecipes = (keyword: string, cuisine: string, time: number, page: number) => {
 		if (!keyword) return;
@@ -52,7 +53,7 @@ const HomePage = () => {
 	};
 
 	return (
-		<main className="main--home">
+		<main className="home__main">
       <div className="home__search">
         <h1>Find Your Recipes!</h1>
 				<RecipeForm submitChoices={updateChoices} />
@@ -64,10 +65,10 @@ const HomePage = () => {
 						<RecipeList recipes={recipes} page={page} updatePage={updatePage} totalResults={totalResults}/>
 					)} 
 					{renderNoResults && (
-						<p>No recipes found. Check your spelling or try a different search.</p>
+						<p className="no-results">No recipes found. Check your spelling or try a different search.</p>
 					)}
-					{!loading && !submitted && (
-						<p>Select the recipe you want to find</p>
+					{renderSearchPrompt && (
+						<p className="no-results">Select the recipe you want to find</p>
 					)}
 				</div>
         {!!loadError && !submitted && <p className="error" role="alert">{loadError}</p>}
