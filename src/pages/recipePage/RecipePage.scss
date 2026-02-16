@@ -4,6 +4,7 @@
 	min-height: 100vh;
 	max-width: 1000px;
 	margin: 0 auto;
+	font-family: var(--font-family-sans-serif);
 
 	&__header {
 		flex: 0 0 auto;
@@ -33,6 +34,7 @@
 		grid-area: title;
 		font-size: var(--font-size-h1);
 		margin: 0;
+		font-family: var(--font-family-h1);
 	}
 
 	&__image {

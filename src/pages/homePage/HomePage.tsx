@@ -55,12 +55,12 @@ const HomePage = () => {
 	return (
 		<main className="home__main">
       <div className="home__search">
-        <h1>Find Your Recipes!</h1>
+        <h1 className="home__title">Find Your Recipes!</h1>
 				<RecipeForm submitChoices={updateChoices} />
       </div>
       <div className="home__content">
 				<div role="status" aria-live="polite">
-					{loading && <p>Loading recipes...</p>}
+					{loading && <p className="loading-results">Loading recipes...</p>}
 					{renderResults && (
 						<RecipeList recipes={recipes} page={page} updatePage={updatePage} totalResults={totalResults}/>
 					)} 

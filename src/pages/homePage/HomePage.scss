@@ -13,12 +13,19 @@
 		width: 40%;
 	}
 
+	&__title {
+		font-family: var(--font-family-h1);
+		font-size: var(--font-size-h1);
+	}
+
 	&__content {
+		font-family: var(--font-family-sans-serif);
 		width: 60%;
 		height: 100%;
 		margin-left: 50px;
 
-		.no-results {
+		.no-results,
+		.loading-results {
 			margin-top: 100px;
 			text-align: center;
 		}

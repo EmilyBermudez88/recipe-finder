@@ -34,11 +34,16 @@
 		margin-top: var(--spacing-2x);
 		padding: var(--spacing-base) var(--spacing-2x);
 		border: var(--border);
-		color: var(--text-colour);
+		color: var(--black);
 		text-decoration: none;
 		background-color: var(--white);
 		&:hover {
 			background-color: var(--button-hover);
+		}
+
+		&:focus {
+			outline: var(--border-thin);
+			outline-offset: calc(0px - var(--spacing-base) - 1px);
 		}
 
 		.sr-only {
@@ -65,6 +70,15 @@
 		font-size: var(--font-size-lrg);
 		display: flex;
 		align-items: center;
+
+		&:hover {
+			background-color: var(--button-hover);
+		}
+
+		&:focus {
+			outline: var(--border-thin);
+			outline-offset: calc(0px - var(--spacing-base));
+		}
 
 		&:disabled {
 			background-color: var(--disabled);

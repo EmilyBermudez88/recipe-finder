@@ -11,6 +11,7 @@
 	}
 
 	&__group-label {
+		font-family: var(--font-family-sans-serif);
 		text-align: right;
 		white-space: nowrap;
 	}
@@ -65,16 +66,16 @@
 	&__reset-button {
 		background: black;
 		position: absolute;
-		right: var(--spacing-2x);
+		right: 6px;
 		border: none;
 		border-radius: var(--spacing-base);
-		color: white;
+		color: var(--white);
 		margin-left: var(--spacing-2x);
 		padding: var(--spacing-base);
 		font-size: var(--spacing-4x);
 
 		&:hover {
-			color: grey;
+			background-color: var(--border-colour);
 		}
 	}	
 
@@ -87,13 +88,19 @@
 	}
 
 	&__select {
+		font-family: var(--font-family-sans-serif);
 		border: var(--border-input);
 		padding: var(--spacing-2x);
 		width: 100%;
 		background-color: transparent;
 
 		&:hover {
-			border-color: grey;
+			border-color: var(--black);
+		}
+
+		&:focus {
+			outline: var(--border-thin);
+			outline-offset: calc(0px - var(--spacing-base) - 2px);
 		}
 	}
 
@@ -102,10 +109,18 @@
 		padding: var(--spacing-2x);
 		border: var(--border-input);
 		background-color: var(--white);
-		font-size: var(--font-size-lrg);
+		font-size: var(--font-size);
+		font-family: var(--font-family-sans-serif);
+		font-weight: 600;
+
 
 		&:hover {
 			background-color: var(--button-hover);
+		}
+
+		&:focus {
+			outline: var(--border-thin);
+			outline-offset: calc(0px - var(--spacing-base) - 2px);
 		}
 	}
 }

@@ -88,7 +88,7 @@ const RecipeForm = ({ submitChoices }: RecipeFormProps) => {
 					))}
 				</select>
 			</div>
-			<button	className="form__button" type="submit">Find Your Recipes!</button>
+			<button	className="form__button" type="submit">FIND RECIPE</button>
 		</form>
 	)
 }
