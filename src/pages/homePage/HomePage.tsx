@@ -16,7 +16,7 @@ const HomePage = () => {
 	const renderResults = recipes.length > 0 && !loading;
 	const renderNoResults = recipes.length === 0 && submitted && !loading && !loadError;
 
-  const loadRecipes = (keyword: string, cuisine: string, page: number) => {
+  const loadRecipes = (keyword: string, cuisine: string, time: number, page: number) => {
 		if (!keyword) return;
 	
 		setLoading(true);
@@ -24,7 +24,8 @@ const HomePage = () => {
 		setLoadError('');
 
 		const offset = (page - 1) * RESULTS_PER_PAGE;
-		fetchRecipes(keyword, cuisine, offset)
+		let adjustedTime = time === 0 ? 720 : time;
+		fetchRecipes(keyword, cuisine, adjustedTime, offset)
 			.then((data) => {
 				setRecipes(data.results);
 				setTotalResults(data.totalResults || 0);
@@ -32,21 +33,22 @@ const HomePage = () => {
 			})
 			.catch((err) => {
 				setRecipes([]);
+				setSubmitted(true);
 				setLoadError(err.message ?? 'Failed to load matching recipes.')
 			})
 			.finally(() => setLoading(false));
   }
 
-	const updateChoices = (keyword: string, cuisine: string) => {
-		setSearchParams({ keyword, cuisine });
+	const updateChoices = (keyword: string, cuisine: string, time: number) => {
+		setSearchParams({ keyword, cuisine , time});
 		setCurrentPage(1);
-    loadRecipes(keyword, cuisine, 1)
+    loadRecipes(keyword, cuisine, time, 1)
 	}
 
 	const updatePage = (action: string) => {
     const newPage = action === 'increment' ? page + 1 : Math.max(1, page - 1);
 		setCurrentPage(newPage);
-    loadRecipes(searchParams.keyword, searchParams.cuisine, newPage);
+    loadRecipes(searchParams.keyword, searchParams.cuisine, searchParams.time, newPage);
 	};
 
 	return (
@@ -56,18 +58,19 @@ const HomePage = () => {
 				<RecipeForm submitChoices={updateChoices} />
       </div>
       <div className="home__content">
-				{loading && <p>Loading recipes...</p>}
-        {renderResults ? (
-          <>
-            <h2>Recipe List</h2>
-            <RecipeList recipes={recipes} page={page} updatePage={updatePage} totalResults={totalResults}/>
-          </>
-        ) : renderNoResults ? (
-          <p>No recipes found. Check your spelling or try a different search.</p>
-        ) : !loading && (
-				<p>Select the recipe you want to find</p>
-			)}
-        {!!loadError && <p className="error">{loadError}</p>}
+				<div role="status" aria-live="polite">
+					{loading && <p>Loading recipes...</p>}
+					{renderResults && (
+						<RecipeList recipes={recipes} page={page} updatePage={updatePage} totalResults={totalResults}/>
+					)} 
+					{renderNoResults && (
+						<p>No recipes found. Check your spelling or try a different search.</p>
+					)}
+					{!loading && !submitted && (
+						<p>Select the recipe you want to find</p>
+					)}
+				</div>
+        {!!loadError && !submitted && <p className="error" role="alert">{loadError}</p>}
       </div>
 		</main>
 	)

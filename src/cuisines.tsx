@@ -1,4 +1,4 @@
-export const CUISINELIST: string[] = [
+export const CUISINE_LIST: string[] = [
   "African",
   "American",
   "British",
@@ -25,4 +25,12 @@ export const CUISINELIST: string[] = [
   "Spanish",
   "Thai",
   "Vietnamese",
+];
+
+export const MAX_TIME_LIST: { label: string; value: number }[] = [
+  { label: "20min: I'm squeezed for time", value: 20 },
+  { label: '30min: I have a couple minutes', value: 30 },
+  { label: '45min: I have some time', value: 45 },
+  { label: '1hr: I have plenty of time', value: 60 },
+  { label: "Let's cook something amazing", value: 720 },
 ];

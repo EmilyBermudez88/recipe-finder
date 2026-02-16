@@ -1,8 +1,8 @@
 .form {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	row-gap: 24px;
-	column-gap: 12px;
+	row-gap: var(--spacing-6x);
+	column-gap: var(--spacing-3x);
 	align-items: center;
 	max-width: 450px;
 
@@ -15,56 +15,83 @@
 		white-space: nowrap;
 	}
 
-	&__input-box {
-		box-sizing: border-box;
-		border: 2px solid white;
-		// width: 250px;
-		display: flex;
-		align-items: center;
-		padding: 8px;
-		&:focus-within {
-			outline: 1px solid white;
-			outline-offset: -6px
-		}
-		&:hover {
-			border-color: grey;
-		}
-
-		&--error {
-			&, &:hover{
-					border-color: red;
-			}
-			.form__icon {
-					color: red;
-			}
-		}
-	}
-
-	&__validation-message {
-		color: red;
-		position: absolute;
-		bottom: calc(0px - 18px);
-		font-size: 12px;
-		margin: 0;
-	}
-
 	&__input-wrapper {
 		position: relative;
 	}
 
+	&__input-box {
+		box-sizing: border-box;
+		border: var(--border-input);
+		display: flex;
+		align-items: center;
+		padding: var(--spacing-2x);
+
+		&:focus-within {
+			outline: var(--border-thin);
+			outline-offset: calc(0px - var(--spacing-base) - 2px);
+		}
+
+		&:hover {
+			border-color: var(--black);
+		}
+
+		&--error {
+			&, &:hover{
+					border-color: var(--error-colour);
+			}
+	
+			.form__icon--search {
+					color: var(--error-colour);
+			}
+		}
+	}
+
 	&__input {
 		flex-grow: 1;
+		background-color: transparent;
+		border: none;
 		&:focus {
 				outline: none;
 		}
 	}
 
+	&__icon {
+		&--search {
+			margin-right: var(--spacing-2x);
+			color: var(--border-colour-light);
+		}
+	}
+
+	&__reset-button {
+		background: black;
+		position: absolute;
+		right: var(--spacing-2x);
+		border: none;
+		border-radius: var(--spacing-base);
+		color: white;
+		margin-left: var(--spacing-2x);
+		padding: var(--spacing-base);
+		font-size: var(--spacing-4x);
+
+		&:hover {
+			color: grey;
+		}
+	}	
+
+	&__validation-message {
+		color: var(--error-colour);
+		position: absolute;
+		bottom: -18px;
+		font-size: var(--font-size-sm);
+		margin: 0;
+	}
+
 	&__select {
-		border: 2px solid white;
-		padding: 8px;
+		border: var(--border-input);
+		padding: var(--spacing-2x);
 		width: 100%;
 		background-color: transparent;
-		color: white;
+
 		&:hover {
 			border-color: grey;
 		}
@@ -72,12 +99,13 @@
 
 	&__button {
 		grid-column: 2 / -1;
-		padding: 8px;
-		border: 2px solid white;
-		background-color: transparent;
-		color: white;
+		padding: var(--spacing-2x);
+		border: var(--border-input);
+		background-color: var(--white);
+		font-size: var(--font-size-lrg);
+
 		&:hover {
-			border-color: grey;
+			background-color: var(--button-hover);
 		}
 	}
 }
@@ -92,13 +120,15 @@
 			display: block;
 			margin-bottom: 16px;
 		}
+
 		&__group-label {
 			text-align: left;
 			margin-bottom: 4px;
 			display: block;
 		}
-				&__button {
-		grid-column: 1 / -1;
+
+		&__button {
+			grid-column: 1 / -1;
 		}
 	}
 }

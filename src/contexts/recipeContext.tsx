@@ -10,6 +10,7 @@ type Recipe = {
 type SearchParams = {
     keyword: string;
     cuisine: string;
+    time: number;
 }
 
 type RecipeContextType = {
@@ -26,7 +27,7 @@ type RecipeContextType = {
 export const RecipeContext = createContext<RecipeContextType | null>(null);
 
 const RecipeProvider = ({ children }: { children: ReactNode }) => {
-    const [searchParams, setSearchParams] = useState<SearchParams>({ keyword: '', cuisine: '' });
+    const [searchParams, setSearchParams] = useState<SearchParams>({ keyword: '', cuisine: '', time: 0 });
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalResults, setTotalResults] = useState(0);

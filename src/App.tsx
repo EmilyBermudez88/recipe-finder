@@ -2,7 +2,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import RecipeProvider from './contexts/recipeContext';
 import HomePage from './pages/homePage/HomePage';
 import RecipePage from './pages/recipePage/RecipePage';
-import './App.css'
+import './styles/base.scss'
 
 function App() {
 

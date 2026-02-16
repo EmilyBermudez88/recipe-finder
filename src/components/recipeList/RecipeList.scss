@@ -6,11 +6,12 @@
 
 	&__card {
 		display: flex;
-		gap: 12px;
-		padding: 4px;
-		border: 2px solid white;
-		margin-bottom: 16px;
+		gap: var(--spacing-3x);
+		padding: var(--spacing-base);
+		border: var(--border-thin);
+		margin-bottom: var(--spacing-4x);
 		align-items: stretch;
+		background-color: var(--card-colour);
 	}
 
 	&__image {
@@ -24,18 +25,49 @@
 			width: 100%;
 			object-fit: cover;
 			align-self: center;
+			border: 2px solid var(--white);
 		}
 	}
 
 	&__link {
 		display: inline-block;
-		margin-top: 8px;
-		padding: 4px 8px;
-		border: 2px solid white;
-		color: white;
+		margin-top: var(--spacing-2x);
+		padding: var(--spacing-base) var(--spacing-2x);
+		border: var(--border);
+		color: var(--text-colour);
 		text-decoration: none;
+		background-color: var(--white);
 		&:hover {
-			border-color: grey;
+			background-color: var(--button-hover);
+		}
+
+		.sr-only {
+			position: absolute;
+			opacity: 0;
+			width: 1px;
+			height: 1px;
+			overflow: hidden;
+		}
+	}
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--spacing-2x);
+
+	&__button {
+		border: var(--border-thin);
+		border-radius: var(--spacing-base);
+		padding: 4px 2px;
+		background-color: var(--white);
+		font-size: var(--font-size-lrg);
+		display: flex;
+		align-items: center;
+
+		&:disabled {
+			background-color: var(--disabled);
 		}
 	}
 }
@@ -44,6 +76,14 @@
 	.recipes {
 		&-container {
 			padding-left: 0;
+		}
+	}
+}
+
+@media (max-width: 450px) {
+	.recipes {
+		&__image {
+			max-width: 100px;
 		}
 	}
 }
