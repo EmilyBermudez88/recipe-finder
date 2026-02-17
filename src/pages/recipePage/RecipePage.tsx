@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import Toggle from '../../components/toggle/Toggle';
 import { fetchRecipeDetails } from '../../utils/spoonacularService';
 import './RecipePage.scss';
 
@@ -10,9 +11,16 @@ type InstructionStep = {
 	number: number;
 }
 
+type IngredientMeasurement = {
+	metric: { amount: number, unitShort: string };
+	us: { amount: number, unitShort: string }
+}
+
 type Ingredient = {
 	id: number;
 	original: string;
+	measures: IngredientMeasurement;
+	nameClean: string;
 }
 
 type RecipeDetails = {
@@ -35,7 +43,10 @@ const RecipePage = () => {
 	const { recipeId } = useParams<{ recipeId: string }>();
 	const [loadError, setLoadError] = useState('');
 	const [recipeDetails, setRecipeDetails] = useState<RecipeDetails | null>(null);
+	const [isMetric, setIsMetric] = useState(false);
 	const [loading, setLoading] = useState(false);
+
+	const measurement = isMetric ? 'metric' : 'us';
 
 	useEffect(() => {
 		if (!recipeId) return;
@@ -48,6 +59,7 @@ const RecipePage = () => {
 			.catch((err) => setLoadError(err.message || 'Failed to load recipe details.'))
 			.finally(() => setLoading(false));
 	}, [recipeId]);
+	console.log(recipeDetails);
 
 	return (
 		<div className="recipe-page">
@@ -82,12 +94,20 @@ const RecipePage = () => {
 							</div>
 						</div>
 						<div className="recipe__ingredients">
-							<h2>Ingredients</h2>
+							<div className="recipe__ingredients-header">
+								<h2>Ingredients</h2>
+								<Toggle isMetric={isMetric} setIsMetric={setIsMetric} />
+							</div>
 							{recipeDetails.extendedIngredients.length > 0 && (
 								<ul className="recipe__list">
 									{recipeDetails.extendedIngredients.map((ingredient) => (
 										<li key={ingredient.id}>
-											<p className="recipe__ingredient-item">{ingredient.original}</p>
+											<p className="recipe__ingredient-item">
+												<span className="recipe__ingredient-item--amount">
+													{ingredient.measures[measurement].amount} {ingredient.measures[measurement].unitShort}
+												</span>
+												{ingredient.nameClean}
+											</p>
 										</li>
 									))}
 								</ul>
@@ -95,12 +115,14 @@ const RecipePage = () => {
 						</div>
 						<div className="recipe__instructions">
 							<h2>Instructions</h2>
-							{recipeDetails.analyzedInstructions.length > 0 && (
+							{recipeDetails.analyzedInstructions.length > 0 ? (
 								<ol className="recipe__list">
 									{recipeDetails.analyzedInstructions[0].steps.map((step) => (
 										<li key={step.number} className="recipe__instructions-step">{step.step}</li>
 									))}
 								</ol>
+							): (
+								<p>No Instructions Provided</p>
 							)}
 						</div>
 					</>

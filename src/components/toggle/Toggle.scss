@@ -1,0 +1,58 @@
+.toggle {
+  //local variables
+  --toggle-width: 45px;
+  --toggle-slider-width: 16px;
+
+  padding: var(--spacing-base);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 130px;
+
+  &__container {
+    box-sizing: border-box;
+    position: relative;
+    width: var(--toggle-width);
+    height: 24px;
+    background-color: var(--white);
+    border: var(--border);
+    border-radius: 12px;
+  }
+
+  &__slider {
+    &::before {
+      position: absolute;
+      left: var(--border-width);
+      top:  var(--border-width);
+      height: var(--toggle-slider-width);
+      width: var(--toggle-slider-width);
+      background-color: var(--black);
+      border-radius: 12px;
+      content: '';
+    }
+  }
+
+  &__input {
+    appearance: none;
+    outline: none;
+    margin: 0;
+
+    &:checked + .toggle__container .toggle__slider::before {
+      // Move slider to the right when checked
+      // border * 3 refers to L& R borders + padding
+      left: calc(var(--toggle-width) - calc(var(--border-width) * 3) - var(--toggle-slider-width));
+    }
+  }
+
+  &:has(.toggle__input:focus-visible),
+  &:has(.toggle__input:active),
+  &:hover {
+    border: var(--border);
+    border-radius: 4px;
+    padding: calc(var(--spacing-base) - var(--border-width));
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -99,9 +99,20 @@
 		}
 	}
 
+	&__ingredients-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
 	&__ingredient-item {
 		margin: 0;
 		line-height: 1.5;
+
+		&--amount {
+			font-weight: 600;
+			margin-right: var(--spacing-2x);
+		}
 	}
 
 	&__instructions {

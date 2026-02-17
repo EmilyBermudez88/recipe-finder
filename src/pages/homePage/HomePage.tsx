@@ -53,7 +53,6 @@ const HomePage = () => {
 		setCurrentPage(newPage);
     loadRecipes(searchParams.keyword, searchParams.cuisine, searchParams.time, newPage);
 	};
-	console.log(loadError, submitted)
 
 	return (
 		<main className="home__main">
