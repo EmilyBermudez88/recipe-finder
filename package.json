@@ -1,8 +1,10 @@
 {
   "name": "recipe-finder",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "author": "Emily Bermudez",
+  "description": "sort by name, cuisine and time to find recipes",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

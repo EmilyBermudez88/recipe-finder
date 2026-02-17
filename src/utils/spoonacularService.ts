@@ -29,18 +29,3 @@ export const fetchRecipeDetails = async (id: number) => {
         throw error;
     }
 };
-
-export const fetchRecipeInstructions = async (id: number) => {
-    try {
-        const url = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${apiKey}`;
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch recipe instructions');
-        }
-        const data = await response.json();
-        return data;
-    } catch(error: any) {
-        throw error;
-    }
-};

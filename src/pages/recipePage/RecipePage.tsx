@@ -59,7 +59,6 @@ const RecipePage = () => {
 			.catch((err) => setLoadError(err.message || 'Failed to load recipe details.'))
 			.finally(() => setLoading(false));
 	}, [recipeId]);
-	console.log(recipeDetails);
 
 	return (
 		<div className="recipe-page">
