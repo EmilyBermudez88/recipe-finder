@@ -26,8 +26,22 @@
 
 		.no-results,
 		.loading-results {
-			margin-top: 100px;
+			font-size: var(--font-size-xl);
+			margin-top: 200px;
 			text-align: center;
+		}
+
+		.error {
+			margin-top: 200px;
+			border: 2px solid var(--error-colour);
+			border-radius: 4px;
+			background-color: rgb(254, 130, 130);
+			padding: var(--spacing-3x);
+			text-align: center;
+
+			&__icon {
+				margin-right: var(--spacing-3x);
+			}
 		}
 	}
 }
@@ -44,6 +58,22 @@
 			width: 100%;
 			max-width: 500px;
 			margin-left: 0;
+		}
+
+		&__content {
+			.no-results,
+			.loading-results,
+			.error {
+				margin-top: 60px;
+			}
+		}
+	}
+}
+
+@media (max-width: 450px) {
+	.home {
+		&__title {
+			font-size: var(--font-size-h1-mobile);
 		}
 	}
 }

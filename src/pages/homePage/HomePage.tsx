@@ -1,4 +1,6 @@
 import { useState, useContext } from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { RecipeContext } from '../../contexts/recipeContext';
 import RecipeForm from '../../components/recipeForm/RecipeForm';
 import RecipeList from '../../components/recipeList/RecipeList';
@@ -51,6 +53,7 @@ const HomePage = () => {
 		setCurrentPage(newPage);
     loadRecipes(searchParams.keyword, searchParams.cuisine, searchParams.time, newPage);
 	};
+	console.log(loadError, submitted)
 
 	return (
 		<main className="home__main">
@@ -71,7 +74,12 @@ const HomePage = () => {
 						<p className="no-results">Select the recipe you want to find</p>
 					)}
 				</div>
-        {!!loadError && !submitted && <p className="error" role="alert">{loadError}</p>}
+        {!!loadError && (
+					<p className="error" role="alert">
+						<FontAwesomeIcon className="error__icon" icon={faCircleExclamation}/>
+						{loadError}
+					</p>
+					)}
       </div>
 		</main>
 	)

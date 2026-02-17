@@ -152,6 +152,9 @@
 
 @media (max-width: 500px) {
 	.recipe {
+		&__title {
+			font-size: var(--font-size-h1-mobile);
+		}
 		&__highlights-container {
 			flex-direction: column;
 			flex-wrap: wrap;
@@ -170,6 +173,11 @@
 			ul {
 				grid-template-columns: 1fr;
 			}
+		}
+
+		&__pill-bar {
+			width: 80%;
+			margin: 0 auto;
 		}
 	}
 }
